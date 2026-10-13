@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ☕ Tea Reserve — Website
 
 A production-ready static website for **Tea Reserve**, built with **Astro** + **Tailwind CSS v4**. Deployable on Cloudflare Pages or Netlify.
@@ -181,3 +182,8 @@ See **`TODO.md`** for the complete checklist.
 ---
 
 *Built with ❤️ for Tea Reserve, Mumbai.*
+=======
+# TeaReserve
+
+	
+
