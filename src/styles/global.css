@@ -1,0 +1,391 @@
+/* Google Fonts — must come before @import tailwindcss */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   Tea Reserve — Global Styles
+   Design System: Premium Indian tea brand — warm, heritage, modern
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── CSS Custom Properties ─────────────────────────────────────── */
+:root {
+  --color-green:       #0f4d2e;
+  --color-green-dark:  #0a3520;
+  --color-gold:        #b8902f;
+  --color-gold-light:  #e9c76a;
+  --color-cream:       #fbf6e6;
+  --color-ink:         #1f1f1f;
+  --color-whatsapp:    #25D366;
+  --color-white:       #ffffff;
+  --color-muted:       #6b7280;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --shadow-card: 0 4px 24px rgba(15, 77, 46, 0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 12px 40px rgba(15, 77, 46, 0.15), 0 2px 8px rgba(0,0,0,0.06);
+
+  --transition-base: 0.25s ease;
+}
+
+/* ── Base Reset ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-white);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Typography ────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+p { line-height: 1.8; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Focus States (Accessibility) ─────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Gold Divider ──────────────────────────────────────────────── */
+.gold-divider {
+  width: 4rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 0 auto;
+}
+
+.gold-divider-left {
+  margin-left: 0;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+/* ── Section Spacing ───────────────────────────────────────────── */
+.section-padding {
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+/* ── Tailwind @theme block for CSS variables ───────────────────── */
+@theme {
+  --color-green:       #0f4d2e;
+  --color-green-dark:  #0a3520;
+  --color-gold:        #b8902f;
+  --color-gold-light:  #e9c76a;
+  --color-cream:       #fbf6e6;
+  --color-ink:         #1f1f1f;
+  --color-whatsapp:    #25D366;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+}
+
+/* ── Scroll Reveal ─────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-2rem);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(2rem);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Stagger delays ─────────────────────────────────────────────── */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+/* ── Floating WhatsApp Pulse ────────────────────────────────────── */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  50%       { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+.wa-pulse {
+  animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Steam Animation ────────────────────────────────────────────── */
+@keyframes steam-rise {
+  0%   { transform: translateY(0) scaleX(1); opacity: 0.8; }
+  50%  { transform: translateY(-30px) scaleX(1.2); opacity: 0.4; }
+  100% { transform: translateY(-60px) scaleX(0.8); opacity: 0; }
+}
+
+.steam-path {
+  animation: steam-rise 2.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.steam-path:nth-child(2) { animation-delay: 0.5s; }
+.steam-path:nth-child(3) { animation-delay: 1s; }
+
+/* ── Floating Leaf ──────────────────────────────────────────────── */
+@keyframes float-leaf {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(5deg); }
+  66%       { transform: translateY(-6px) rotate(-3deg); }
+}
+
+.leaf-float {
+  animation: float-leaf 6s ease-in-out infinite;
+}
+
+/* ── Back to Top ────────────────────────────────────────────────── */
+#back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Reduced Motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Smooth page fade ───────────────────────────────────────────── */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: page-fade-in 0.4s ease forwards;
+}
+
+/* ── Mobile menu ────────────────────────────────────────────────── */
+#mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+#mobile-menu.open {
+  max-height: 400px;
+}
+
+/* ── Product Card Hover ─────────────────────────────────────────── */
+.product-card {
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-gold) !important;
+}
+
+.product-card:hover .product-card-img {
+  transform: scale(1.05);
+}
+
+.product-card-img {
+  transition: transform 0.4s ease;
+}
+
+/* ── Header shrink on scroll ────────────────────────────────────── */
+#site-header {
+  transition: padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+#site-header.scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.12);
+}
+
+/* ── FAQ Accordion ──────────────────────────────────────────────── */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.faq-answer.open {
+  max-height: 400px;
+}
+
+/* ── Nutrition Table ────────────────────────────────────────────── */
+.nutrition-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  border: 1px solid rgba(184, 144, 47, 0.3);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.nutrition-table thead th {
+  background-color: var(--color-green);
+  color: var(--color-cream);
+  font-family: var(--font-serif);
+}
+
+.nutrition-table tbody tr:nth-child(even) {
+  background-color: rgba(251, 246, 230, 0.5);
+}
+
+/* ── WhatsApp Button ────────────────────────────────────────────── */
+.btn-whatsapp {
+  background-color: var(--color-whatsapp);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ea952;
+  transform: scale(1.03);
+}
+
+.btn-whatsapp:active {
+  transform: scale(0.98);
+}
+
+/* ── Primary Gold Button ────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--color-gold);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.btn-primary:hover {
+  background-color: #a07828;
+  transform: scale(1.03);
+  box-shadow: 0 4px 16px rgba(184, 144, 47, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* ── Secondary Green Outline Button ────────────────────────────── */
+.btn-secondary {
+  border: 2px solid var(--color-green);
+  color: var(--color-green);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color var(--transition-base), color var(--transition-base), transform var(--transition-base);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-green);
+  color: var(--color-cream);
+  transform: scale(1.03);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* ── Hero gradient overlay ──────────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 53, 32, 0.95) 0%,
+    rgba(15, 77, 46, 0.88) 50%,
+    rgba(10, 53, 32, 0.95) 100%
+  );
+}
+
+/* Parallax container */
+.parallax-img {
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+/* ── Trust strip icons ──────────────────────────────────────────── */
+.trust-icon {
+  color: var(--color-gold);
+}

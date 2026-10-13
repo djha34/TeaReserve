@@ -1,0 +1,71 @@
+---
+// src/pages/privacy.astro — Privacy Policy
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { site } from '../config.js';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy Policy for Tea Reserve. How we handle your data when you contact us via WhatsApp."
+  noIndex={true}
+>
+  <section class="bg-green-dark py-12 px-4">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <Breadcrumb crumbs={[{ href: '/', label: 'Home' }, { label: 'Privacy Policy' }]} />
+      <h1 class="font-serif text-cream mt-4">Privacy Policy</h1>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 prose prose-lg max-w-none">
+      <!-- OWNER: Fill in the details below. This is a placeholder. -->
+      <div class="bg-yellow-50 border-2 border-dashed border-yellow-300 rounded-xl p-4 mb-8 not-prose">
+        <p class="text-yellow-800 text-sm font-semibold">📌 Owner Action Required: Fill in this Privacy Policy before deploying.</p>
+        <p class="text-yellow-700 text-xs mt-1">Replace this placeholder with your actual privacy policy. You may consult a legal professional.</p>
+      </div>
+
+      <p class="text-ink/50 text-sm mb-6">Last updated: [ADD DATE]</p>
+
+      <h2 class="font-serif text-green">1. Information We Collect</h2>
+      <p>
+        Tea Reserve operates as a static informational website. We do not collect, store, or process any personal data directly through this website.
+      </p>
+      <p>
+        When you contact us via WhatsApp (using the links on this site), you share your WhatsApp profile information (such as your name and phone number) directly with us through the WhatsApp platform. This information is subject to <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-green underline">WhatsApp's Privacy Policy</a>.
+      </p>
+
+      <h2 class="font-serif text-green">2. How We Use Your Information</h2>
+      <p>
+        Any information you share with us via WhatsApp is used solely for the purpose of responding to your enquiry or processing your order. We do not sell, rent, or share your information with third parties.
+      </p>
+
+      <h2 class="font-serif text-green">3. Cookies & Analytics</h2>
+      <p>
+        [OWNER: Describe any cookies or analytics tools you use. If none, state: "This website does not use cookies or analytics tracking tools."]
+      </p>
+
+      <h2 class="font-serif text-green">4. Third-Party Links</h2>
+      <p>
+        This website contains links to WhatsApp (wa.me). We are not responsible for the privacy practices of third-party websites or services.
+      </p>
+
+      <h2 class="font-serif text-green">5. Data Retention</h2>
+      <p>
+        [OWNER: Describe how long you keep customer data. Example: "We retain WhatsApp conversation records for up to 12 months for customer service purposes."]
+      </p>
+
+      <h2 class="font-serif text-green">6. Your Rights</h2>
+      <p>
+        You have the right to request deletion of any personal data we hold about you. To make such a request, please contact us at <a href={`mailto:${site.email}`} class="text-green underline">{site.email}</a>.
+      </p>
+
+      <h2 class="font-serif text-green">7. Contact</h2>
+      <p>
+        For any privacy-related questions, contact us at:<br />
+        Email: <a href={`mailto:${site.email}`} class="text-green underline">{site.email}</a><br />
+        Address: {site.address}
+      </p>
+    </div>
+  </section>
+</BaseLayout>

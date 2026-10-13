@@ -1,0 +1,236 @@
+---
+// src/pages/products/[slug].astro — Product detail page
+// Auto-generated for each product in products.json
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { site } from '../../config.js';
+import products from '../../data/products.json';
+
+export function getStaticPaths() {
+  return products.map(p => ({
+    params: { slug: p.slug },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+const waLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(product.whatsappMessage)}`;
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  image: `${site.siteUrl}${product.image}`,
+  description: product.description,
+  brand: { '@type': 'Brand', name: site.name },
+  offers: {
+    '@type': 'Offer',
+    price: product.price,
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    priceValidUntil: new Date(new Date().getFullYear() + 1, 0, 1).toISOString().split('T')[0],
+    seller: { '@type': 'Organization', name: site.name },
+  },
+};
+
+const faqItems = [
+  { q: 'How do I order?', a: `Click the "Order on WhatsApp" button above. It will open a WhatsApp chat with a pre-filled message. Send it and our team will respond shortly.` },
+  { q: 'What is the shelf life?', a: `Best before ${product.shelfLife}. The packing date is printed on every pack.` },
+  { q: 'Is the MRP inclusive of taxes?', a: `Yes. ₹${product.price} is the MRP inclusive of all taxes. No additional charges.` },
+];
+---
+
+<BaseLayout
+  title={product.name}
+  description={`${product.name} — ${product.weight}, MRP ₹${product.price} (incl. all taxes). ${product.description}`}
+  jsonLd={productJsonLd}
+>
+  <!-- Page header -->
+  <section class="bg-green-dark py-10 px-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb crumbs={[
+        { href: '/', label: 'Home' },
+        { href: '/products', label: 'Products' },
+        { label: product.name },
+      ]} />
+    </div>
+  </section>
+
+  <!-- Product Detail -->
+  <section class="section-padding bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+        <!-- Image -->
+        <div class="reveal-left sticky top-28">
+          <div class="bg-white rounded-3xl p-6 shadow-lg border border-gold/20 overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.imageAlt}
+              width="600"
+              height="700"
+              class="w-full object-contain max-h-[480px]"
+              loading="eager"
+            />
+          </div>
+          <!-- Pack info badges -->
+          <div class="flex gap-3 mt-4 flex-wrap">
+            <span class="bg-green text-cream text-xs font-semibold px-3 py-1.5 rounded-full">Net Weight: {product.weight}</span>
+            <span class="bg-gold text-white text-xs font-semibold px-3 py-1.5 rounded-full">MRP ₹{product.price}</span>
+            <span class="bg-white border border-gold/30 text-gold text-xs font-semibold px-3 py-1.5 rounded-full">{product.priceNote}</span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="reveal-right">
+          <span class="inline-block bg-cream border border-gold/30 text-green text-xs font-semibold tracking-wide px-3 py-1 rounded-full mb-3">
+            Pure CTC Tea
+          </span>
+          <h1 class="font-serif text-green mb-2">{product.name}</h1>
+          <div class="gold-divider gold-divider-left mb-4"></div>
+
+          <!-- Price -->
+          <div class="flex items-baseline gap-2 mb-4">
+            <span class="text-4xl font-bold font-serif text-green">₹{product.price}</span>
+            <span class="text-ink/50 text-sm">{product.priceNote}</span>
+          </div>
+
+          <p class="text-ink/70 leading-relaxed mb-6">{product.description}</p>
+
+          <!-- Features -->
+          <ul class="space-y-2 mb-6">
+            {product.features.map(f => (
+              <li class="flex items-start gap-3 text-ink/70">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gold mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- Shelf life -->
+          <div class="bg-white rounded-xl border border-gold/20 px-4 py-3 flex items-center gap-3 mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gold shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm text-ink/70">Best before: <strong class="text-green">{product.shelfLife}</strong></span>
+          </div>
+
+          <!-- Order CTA -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a
+              href={waLink}
+              class="btn-whatsapp text-base px-8 py-4 justify-center"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Order ${product.name} on WhatsApp`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Order on WhatsApp
+            </a>
+            <a href="/bulk" class="btn-secondary justify-center">Bulk Order?</a>
+          </div>
+
+          <!-- Brewing tip -->
+          <div class="bg-green/5 border border-green/20 rounded-xl p-4">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl" role="img" aria-label="Tea cup">☕</span>
+              <div>
+                <p class="font-semibold text-green text-sm mb-1">Brewing Tip</p>
+                <p class="text-ink/60 text-sm leading-relaxed">{product.brewing.tip}</p>
+                <p class="text-ink/40 text-xs mt-1">Ratio: {product.brewing.ratio}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nutrition Table -->
+  <section class="section-padding bg-white" aria-label="Nutritional information">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 reveal">
+        <SectionTitle
+          title="Nutritional Information"
+          subtitle="Per 100g of product and per 100ml prepared tea."
+          tag="On the Pack"
+          center
+        />
+      </div>
+      <div class="reveal overflow-x-auto rounded-xl shadow-sm border border-gold/20">
+        <table class="nutrition-table text-sm">
+          <thead>
+            <tr>
+              <th scope="col">Nutrient</th>
+              <th scope="col">Per 100g of product</th>
+              <th scope="col">Per 100ml prepared tea*</th>
+            </tr>
+          </thead>
+          <tbody>
+            {product.nutrition.map(row => (
+              <tr>
+                <td class="font-medium text-ink">{row.nutrient} ({row.unit})</td>
+                <td class="text-center">{row.per100g}</td>
+                <td class="text-center">{row.per100ml}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-ink/40 mt-3 italic">* {product.nutritionFootnote}</p>
+    </div>
+  </section>
+
+  <!-- Product FAQ -->
+  <section class="section-padding bg-cream">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="mb-8 reveal">
+        <SectionTitle title="Common Questions" tag="FAQ" center />
+      </div>
+      <div class="space-y-3 reveal">
+        {faqItems.map((faq, i) => (
+          <div class="bg-white rounded-xl border border-gold/20 overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between gap-4 font-medium text-green hover:text-gold transition-colors"
+              aria-expanded="false"
+              aria-controls={`pfaq-${i}`}
+            >
+              <span>{faq.q}</span>
+              <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300 text-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+            <div id={`pfaq-${i}`} class="faq-answer">
+              <p class="px-6 pb-5 text-ink/60 text-sm leading-relaxed">{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related CTA -->
+  <section class="bg-green-dark py-16 px-4 text-center">
+    <div class="max-w-xl mx-auto reveal">
+      <h2 class="font-serif text-cream text-2xl sm:text-3xl mb-3">Ready to Order?</h2>
+      <p class="text-cream/70 mb-6">Message us on WhatsApp and we'll take care of the rest.</p>
+      <a
+        href={waLink}
+        class="btn-whatsapp text-base px-8 py-4 mx-auto inline-flex"
+        target="_blank" rel="noopener noreferrer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order {product.name} — ₹{product.price}
+      </a>
+    </div>
+  </section>
+
+  <script src="../../scripts/faq.js"></script>
+</BaseLayout>

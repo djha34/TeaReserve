@@ -1,0 +1,445 @@
+---
+// src/pages/index.astro — Home page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { site } from '../config.js';
+import products from '../data/products.json';
+
+const featured = products[0];
+const waOrderLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(featured.whatsappMessage)}`;
+const waViewLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent('Hi! I\'d like to know more about Tea Reserve CTC Tea.')}`;
+
+const trustItems = [
+  { icon: '🍃', label: 'Pure CTC Tea', sub: 'Sourced from Assam' },
+  { icon: '🌿', label: 'Rich Aroma', sub: 'Every cup, every time' },
+  { icon: '☕', label: 'Strong Taste', sub: 'Holds up with milk & sugar' },
+  { icon: '📦', label: 'Packed Fresh', sub: 'Batch date on every pack' },
+];
+
+const whyItems = [
+  {
+    title: 'Assam Sourcing',
+    desc: 'Our CTC tea is sourced from the tea gardens of Assam — India\'s most celebrated tea-growing region, known for its bold, malty character.',
+    icon: '🌱',
+  },
+  {
+    title: 'Perfect for Chai',
+    desc: 'CTC tea granules are crafted to brew a full-bodied cup that holds its own when you add milk and sugar — just the way great chai should be.',
+    icon: '☕',
+  },
+  {
+    title: 'Hygienically Packed',
+    desc: 'Every pack carries the batch number and packing date so you always know what you\'re getting — fresh, quality tea with full traceability.',
+    icon: '✅',
+  },
+  {
+    title: 'Honest MRP',
+    desc: '₹420 for 1 kg — no hidden charges. The price printed on the pack is inclusive of all taxes. What you see is what you pay.',
+    icon: '💚',
+  },
+];
+
+const steps = [
+  { num: '01', title: 'Boil Water', desc: 'Bring 200 ml of fresh water to a rolling boil.' },
+  { num: '02', title: 'Add Tea', desc: 'Add 1–2 teaspoons of Tea Reserve CTC tea and let it simmer for 1–2 minutes.' },
+  { num: '03', title: 'Add Milk', desc: 'Pour in milk to taste and bring back to a gentle boil.' },
+  { num: '04', title: 'Strain & Enjoy', desc: 'Add sugar to taste, strain into your cup and enjoy your perfect chai.' },
+];
+
+const faqs = [
+  {
+    q: 'How should I store Tea Reserve CTC tea?',
+    a: 'Store in a cool, dry place away from direct sunlight and strong odours. Keep the pack sealed after every use. An airtight container works best.',
+  },
+  {
+    q: 'What is the shelf life?',
+    a: 'Best before 12 months from the date of packaging, which is printed on every pack.',
+  },
+  {
+    q: 'What is CTC tea?',
+    a: 'CTC stands for Crush, Tear, Curl — a method of processing tea leaves that creates small, dense granules. CTC tea brews quickly, produces a strong, bold liquor and is the preferred choice for masala chai and milk tea.',
+  },
+  {
+    q: 'How much tea should I use per cup?',
+    a: 'We recommend 1–2 teaspoons (approximately 2–4g) per cup of tea, adjusted to your personal taste preference.',
+  },
+  {
+    q: 'How do I place an order?',
+    a: 'Simply click any "Order on WhatsApp" button on this website. It will open a WhatsApp chat with a pre-filled message. Send the message and our team will get back to you with availability and delivery details.',
+  },
+  {
+    q: 'Do you offer bulk orders for tea stalls and businesses?',
+    a: 'Yes! We supply to tea stalls, hotels, offices, and canteens. Visit our Bulk Orders page or send us a WhatsApp message with your quantity requirement and we\'ll share a quote.',
+  },
+];
+---
+
+<BaseLayout
+  title={site.name}
+  description="Tea Reserve — Pure CTC tea from Assam gardens. Rich aroma, strong taste. 1 kg pack at MRP ₹420. Order on WhatsApp. Serving Mumbai, Palghar and beyond."
+>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- HERO SECTION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section
+    class="relative min-h-[92vh] flex items-center overflow-hidden bg-green-dark"
+    aria-label="Hero"
+  >
+    <!-- Background pattern / ornament layer -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Decorative circles -->
+        <circle cx="100" cy="100" r="200" stroke="#b8902f" stroke-width="1" fill="none" />
+        <circle cx="1100" cy="700" r="250" stroke="#b8902f" stroke-width="1" fill="none" />
+        <circle cx="600" cy="400" r="300" stroke="#b8902f" stroke-width="0.5" fill="none" />
+        <!-- Dot grid -->
+        {Array.from({ length: 12 }, (_, r) =>
+          Array.from({ length: 20 }, (_, c) => (
+            <circle cx={c * 70} cy={r * 70} r="1.5" fill="#b8902f" />
+          ))
+        )}
+      </svg>
+    </div>
+
+    <!-- Floating leaf ornaments -->
+    <div class="absolute top-16 left-8 opacity-20 leaf-float" style="animation-delay:0s" aria-hidden="true">
+      <svg viewBox="0 0 60 80" class="w-12 h-16 text-gold" fill="currentColor">
+        <path d="M30 0 C10 20 0 50 30 80 C60 50 50 20 30 0Z"/>
+      </svg>
+    </div>
+    <div class="absolute top-32 right-12 opacity-20 leaf-float" style="animation-delay:2s" aria-hidden="true">
+      <svg viewBox="0 0 60 80" class="w-8 h-12 text-gold-light" fill="currentColor">
+        <path d="M30 0 C10 20 0 50 30 80 C60 50 50 20 30 0Z"/>
+      </svg>
+    </div>
+    <div class="absolute bottom-20 left-1/4 opacity-15 leaf-float" style="animation-delay:1s" aria-hidden="true">
+      <svg viewBox="0 0 60 80" class="w-6 h-10 text-gold" fill="currentColor">
+        <path d="M30 0 C10 20 0 50 30 80 C60 50 50 20 30 0Z"/>
+      </svg>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-0 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Text content -->
+        <div class="text-center lg:text-left">
+          <!-- Tag -->
+          <div class="inline-flex items-center gap-2 bg-gold/20 border border-gold/30 text-gold-light text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-gold-light inline-block"></span>
+            Pure CTC Tea · Assam Gardens
+          </div>
+
+          <!-- Headline -->
+          <h1 class="text-cream font-serif mb-4 leading-tight">
+            From Assam<br />
+            <span class="text-gold">Garden</span> to Your<br />
+            Table
+          </h1>
+
+          <!-- Divider -->
+          <div class="gold-divider mb-6 lg:gold-divider-left lg:ml-0 mx-auto"></div>
+
+          <!-- Subline -->
+          <p class="text-cream/80 text-lg sm:text-xl mb-8 max-w-lg mx-auto lg:mx-0">
+            Pure CTC tea with <strong class="text-cream">rich aroma</strong> and <strong class="text-cream">strong taste</strong> — the perfect base for your everyday chai.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a
+              href={waOrderLink}
+              class="btn-whatsapp text-base px-8 py-4 justify-center"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Order Tea Reserve on WhatsApp"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Order on WhatsApp
+            </a>
+            <a href="/products" class="btn-secondary border-cream/50 text-cream hover:bg-cream hover:text-green text-base px-8 py-4 justify-center">
+              View Our Tea
+            </a>
+          </div>
+
+          <!-- Price badge -->
+          <div class="mt-8 inline-flex items-center gap-3 bg-cream/10 border border-cream/20 rounded-2xl px-5 py-3">
+            <div>
+              <span class="text-3xl font-bold font-serif text-cream">₹420</span>
+              <span class="text-cream/60 text-sm block">{featured.weight} · Incl. all taxes</span>
+            </div>
+            <div class="w-px h-10 bg-cream/20"></div>
+            <div class="text-cream/60 text-xs">Best before<br /><span class="text-cream/80 font-medium">12 months</span></div>
+          </div>
+        </div>
+
+        <!-- Pack image with steam animation -->
+        <div class="relative flex justify-center items-center">
+          <!-- Glow blob -->
+          <div class="absolute w-72 h-72 rounded-full bg-gold/10 blur-3xl" aria-hidden="true"></div>
+
+          <!-- Steam SVG above image -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-16 w-24" aria-hidden="true">
+            <svg viewBox="0 0 100 120" class="w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="steam-path" d="M20 120 Q25 80 15 40 Q10 10 20 0" stroke="#e9c76a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+              <path class="steam-path" d="M50 120 Q55 75 45 35 Q38 5 50 0" stroke="#e9c76a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+              <path class="steam-path" d="M80 120 Q85 80 75 40 Q70 10 80 0" stroke="#e9c76a" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+            </svg>
+          </div>
+
+          <!-- Product image -->
+          <div class="relative z-10 parallax-img">
+            <img
+              src={featured.image}
+              alt={featured.imageAlt}
+              width="500"
+              height="600"
+              class="w-full max-w-xs sm:max-w-sm lg:max-w-md object-contain drop-shadow-2xl"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+
+          <!-- Gold ring ornament -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+            <div class="w-64 h-64 rounded-full border border-gold/20"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-cream/40 animate-bounce" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- TRUST STRIP -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="bg-cream border-y border-gold/20 py-6" aria-label="Brand promises">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {trustItems.map((item, i) => (
+          <div class={`flex items-center gap-4 reveal delay-${(i+1)*100}`}>
+            <span class="text-3xl trust-icon" role="img" aria-label={item.label}>{item.icon}</span>
+            <div>
+              <p class="font-semibold text-green text-sm">{item.label}</p>
+              <p class="text-ink/50 text-xs">{item.sub}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FEATURED PRODUCT -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-padding bg-white" aria-label="Featured product">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <SectionTitle
+          title="Our Tea"
+          subtitle="One product, crafted with care. Pure CTC tea that speaks for itself."
+          tag="What We Offer"
+          center
+        />
+      </div>
+      <div class="max-w-sm mx-auto reveal">
+        <ProductCard product={featured} featured waNumber={site.whatsappNumber} />
+      </div>
+      <div class="text-center mt-8 reveal">
+        <a href="/products" class="btn-secondary inline-flex">View All Products →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- WHY TEA RESERVE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-padding bg-cream" aria-label="Why Tea Reserve">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 reveal">
+        <SectionTitle
+          title="Why Tea Reserve?"
+          subtitle="We keep things simple — great tea, honest pricing, and a pack you can trust."
+          tag="Our Promise"
+          center
+        />
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {whyItems.map((item, i) => (
+          <div class={`reveal delay-${(i+1)*100} bg-white rounded-2xl p-6 shadow-sm border border-gold/10 hover:border-gold/40 hover:shadow-md transition-all text-center`}>
+            <div class="text-4xl mb-4" role="img" aria-label={item.title}>{item.icon}</div>
+            <h3 class="font-serif text-green text-lg mb-2">{item.title}</h3>
+            <p class="text-ink/60 text-sm leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- BREWING GUIDE — 4 STEPS -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-padding bg-green" aria-label="Brewing guide">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 reveal">
+        <SectionTitle
+          title="Perfect Chai in 4 Steps"
+          subtitle="Simple, time-tested, delicious."
+          tag="Brewing Guide"
+          center
+          light
+        />
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {steps.map((step, i) => (
+          <div class={`reveal delay-${(i+1)*100} relative bg-white/5 border border-cream/20 rounded-2xl p-6`}>
+            <span class="absolute -top-4 left-6 bg-gold text-white font-bold font-serif text-xl w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
+              {step.num}
+            </span>
+            <div class="pt-4">
+              <h3 class="font-serif text-cream text-lg mb-2">{step.title}</h3>
+              <p class="text-cream/60 text-sm leading-relaxed">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- OUR STORY TEASER -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-padding bg-white" aria-label="Our story">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal-left">
+          <img
+            src="/assets/logo.jpeg"
+            alt="Tea Reserve — Brand logo with teapot emblem"
+            width="500"
+            height="500"
+            class="rounded-3xl shadow-xl border-2 border-gold/20 w-full max-w-sm mx-auto lg:mx-0"
+            loading="lazy"
+          />
+        </div>
+        <div class="reveal-right">
+          <SectionTitle
+            title="The Tea Reserve Story"
+            subtitle="From the lush gardens of Assam to your morning cup — we believe every cup of chai deserves to be extraordinary."
+            tag="Our Story"
+          />
+          <p class="text-ink/60 mt-4 leading-relaxed">
+            Tea Reserve was founded with one simple mission: to bring high-quality, flavourful CTC tea from Assam's gardens directly to homes and businesses in Mumbai and beyond — at a fair, transparent price.
+          </p>
+          <div class="mt-6 flex gap-4 flex-wrap">
+            <a href="/about" class="btn-primary">Know More</a>
+            <a href="/contact" class="btn-secondary">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- BULK ORDERS BAND -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="bg-green-dark py-16 px-4" aria-label="Bulk orders">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="reveal">
+        <span class="inline-block bg-gold/20 border border-gold/30 text-gold-light text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-4">
+          For Businesses
+        </span>
+        <h2 class="font-serif text-cream text-3xl sm:text-4xl mb-4">
+          Running a Tea Stall, Hotel or Office?
+        </h2>
+        <div class="gold-divider mx-auto mb-6"></div>
+        <p class="text-cream/70 text-lg mb-8 max-w-2xl mx-auto">
+          We supply in bulk to tea stalls, canteens, hotels, and offices across Mumbai and Palghar. Get a quick quote on WhatsApp — no forms, no waiting.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={`https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent('Hi! I need a bulk quote for Tea Reserve CTC Tea. Please share pricing for bulk orders.')}`}
+            class="btn-whatsapp px-8 py-4 text-base justify-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Get a Bulk Quote
+          </a>
+          <a href="/bulk" class="btn-secondary border-cream/40 text-cream hover:bg-cream hover:text-green px-8 py-4 text-base justify-center">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FAQ SECTION -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="section-padding bg-cream" aria-label="Frequently asked questions">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="mb-10 reveal">
+        <SectionTitle
+          title="Frequently Asked Questions"
+          subtitle="Everything you need to know about Tea Reserve."
+          tag="FAQ"
+          center
+        />
+      </div>
+      <div class="space-y-3 reveal">
+        {faqs.map((faq, i) => (
+          <div class="bg-white rounded-xl border border-gold/20 overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 flex items-center justify-between gap-4 font-medium text-green hover:text-gold transition-colors"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${i}`}
+            >
+              <span>{faq.q}</span>
+              <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300 text-gold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+            <div id={`faq-answer-${i}`} class="faq-answer">
+              <p class="px-6 pb-5 text-ink/60 text-sm leading-relaxed">{faq.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FINAL CTA BAND -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="bg-gold py-16 px-4 text-center" aria-label="Order call to action">
+    <div class="max-w-2xl mx-auto reveal">
+      <h2 class="font-serif text-white text-3xl sm:text-4xl mb-4">Ready for Your Perfect Cup?</h2>
+      <p class="text-white/80 text-lg mb-8">Order Tea Reserve CTC Tea directly on WhatsApp. Fast, easy, no hassle.</p>
+      <a
+        href={waOrderLink}
+        class="inline-flex items-center gap-3 bg-white text-green font-bold text-lg px-10 py-4 rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Order Tea Reserve on WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-whatsapp" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order on WhatsApp — ₹420/kg
+      </a>
+    </div>
+  </section>
+
+  <script src="../scripts/faq.js"></script>
+</BaseLayout>

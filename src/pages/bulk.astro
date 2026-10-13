@@ -1,0 +1,189 @@
+---
+// src/pages/bulk.astro — Bulk Orders page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { site } from '../config.js';
+
+const audiences = [
+  { icon: '🫖', title: 'Tea Stalls & Tapris', desc: 'High-volume supply for your daily chai operations. Consistent quality every batch.' },
+  { icon: '🏨', title: 'Hotels & Restaurants', desc: 'Supply for your kitchen, breakfast service, or in-room tea experience.' },
+  { icon: '🏢', title: 'Offices & Corporates', desc: 'Regular supply for your pantry or cafeteria. Bulk pricing available.' },
+  { icon: '🍽️', title: 'Canteens & Caterers', desc: 'Large-quantity supply for events, daily canteen service, or catering operations.' },
+];
+
+const benefits = [
+  'Direct WhatsApp ordering — no complicated forms',
+  'Competitive pricing for bulk quantities',
+  'Consistent quality in every batch',
+  'Packing date printed on every pack',
+  'Serving Mumbai, Palghar, and surrounding areas',
+];
+---
+
+<BaseLayout
+  title="Bulk Orders"
+  description="Bulk CTC tea supply for tea stalls, hotels, offices, and canteens in Mumbai and Palghar. Get a quick WhatsApp quote from Tea Reserve."
+>
+  <!-- Page hero -->
+  <section class="bg-green-dark py-20 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 800 400" fill="none">
+        <circle cx="700" cy="50" r="200" stroke="#b8902f" stroke-width="1" fill="none"/>
+        <circle cx="100" cy="350" r="150" stroke="#b8902f" stroke-width="0.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Breadcrumb crumbs={[{ href: '/', label: 'Home' }, { label: 'Bulk Orders' }]} />
+      <div class="mt-6 max-w-2xl">
+        <SectionTitle
+          title="Bulk Orders"
+          subtitle="Supply your tea stall, hotel, office or canteen with quality CTC tea. Get a quote in minutes on WhatsApp."
+          tag="For Businesses"
+          light
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section-padding bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 reveal">
+        <SectionTitle title="Who We Supply To" subtitle="We work with businesses of all sizes." tag="Our Customers" center />
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {audiences.map((a, i) => (
+          <div class={`reveal delay-${(i+1)*100} bg-white rounded-2xl p-6 shadow-sm border border-gold/10 hover:border-gold/30 hover:shadow-md transition-all text-center`}>
+            <div class="text-4xl mb-4" role="img" aria-label={a.title}>{a.icon}</div>
+            <h3 class="font-serif text-green text-lg mb-2">{a.title}</h3>
+            <p class="text-ink/60 text-sm leading-relaxed">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal-left">
+          <img
+            src="/assets/pack-front.png"
+            alt="Tea Reserve 1 kg CTC Tea pack"
+            width="480"
+            height="580"
+            class="w-full max-w-sm mx-auto object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div class="reveal-right">
+          <SectionTitle title="Why Order in Bulk from Tea Reserve?" tag="Benefits" />
+          <ul class="mt-6 space-y-4">
+            {benefits.map(b => (
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gold mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-ink/70">{b}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Builder -->
+  <section class="section-padding bg-cream" aria-label="Bulk quote builder">
+    <div class="max-w-xl mx-auto px-4 sm:px-6">
+      <div class="mb-8 reveal">
+        <SectionTitle title="Get a Bulk Quote" subtitle="Fill in the details below and tap the button to send us a WhatsApp message with your requirements." tag="Quote Builder" center />
+      </div>
+      <div class="reveal bg-white rounded-2xl shadow-lg border border-gold/20 p-6 sm:p-8">
+        <!-- OWNER NOTE: This form does NOT submit to any server.
+             It builds a WhatsApp link from the selected values and opens WhatsApp. -->
+        <form id="bulk-wa-form" novalidate>
+          <!-- Pack size -->
+          <div class="mb-5">
+            <label for="pack-size" class="block text-sm font-semibold text-green mb-2">Pack Size</label>
+            <select
+              id="pack-size"
+              name="pack-size"
+              class="w-full border-2 border-gold/20 rounded-xl px-4 py-3 text-ink focus:border-green focus:outline-none transition-colors bg-cream"
+              aria-label="Select pack size"
+            >
+              <option value="1 kg">1 kg</option>
+            </select>
+          </div>
+
+          <!-- Quantity -->
+          <div class="mb-5">
+            <label for="qty" class="block text-sm font-semibold text-green mb-2">Number of Packs</label>
+            <input
+              id="qty"
+              name="qty"
+              type="number"
+              min="1"
+              step="1"
+              value="10"
+              placeholder="e.g. 10"
+              class="w-full border-2 border-gold/20 rounded-xl px-4 py-3 text-ink focus:border-green focus:outline-none transition-colors"
+              aria-label="Number of packs"
+              required
+            />
+            <p class="text-xs text-ink/40 mt-1">Enter how many 1 kg packs you need.</p>
+          </div>
+
+          <!-- Business name (optional) -->
+          <div class="mb-6">
+            <label for="biz-name" class="block text-sm font-semibold text-green mb-2">
+              Business Name <span class="font-normal text-ink/40">(optional)</span>
+            </label>
+            <input
+              id="biz-name"
+              name="biz-name"
+              type="text"
+              placeholder="e.g. Sharma Tea Stall"
+              class="w-full border-2 border-gold/20 rounded-xl px-4 py-3 text-ink focus:border-green focus:outline-none transition-colors"
+              aria-label="Business name (optional)"
+            />
+          </div>
+
+          <!-- WhatsApp CTA button -->
+          <button
+            id="bulk-wa-btn"
+            type="button"
+            data-wa={site.whatsappNumber}
+            class="btn-whatsapp w-full justify-center text-base py-4"
+            aria-label="Send bulk quote request on WhatsApp"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Send Quote Request on WhatsApp
+          </button>
+
+          <p class="text-center text-xs text-ink/40 mt-3">
+            This will open WhatsApp with a pre-filled message. No data is stored or submitted.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Direct contact -->
+  <section class="bg-green py-14 px-4 text-center">
+    <div class="max-w-lg mx-auto reveal">
+      <h2 class="font-serif text-cream text-2xl sm:text-3xl mb-3">Prefer to Call?</h2>
+      <p class="text-cream/70 mb-6">Our team is available to discuss your bulk requirements directly.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={`tel:${site.phone1}`} class="btn-primary justify-center">📞 {site.phone1}</a>
+        <a href={`tel:${site.phone2}`} class="btn-secondary border-cream/40 text-cream hover:bg-cream hover:text-green justify-center">📞 {site.phone2}</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="../scripts/whatsapp.js"></script>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+// src/layouts/BaseLayout.astro
+// ─────────────────────────────────────────────────────────────────────────────
+// Base layout used by every page.
+// Props: title, description, ogImage, canonicalUrl, bodyClass
+// ─────────────────────────────────────────────────────────────────────────────
+import '../styles/global.css';
+import { site } from '../config.js';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  bodyClass?: string;
+  noIndex?: boolean;
+  jsonLd?: object;
+}
+
+const {
+  title,
+  description = site.description,
+  ogImage = site.ogImage,
+  canonicalUrl = Astro.url.href,
+  bodyClass = '',
+  noIndex = false,
+  jsonLd,
+} = Astro.props;
+
+const pageTitle = title === site.name ? site.name : `${title} | ${site.name}`;
+const ogImageAbsolute = ogImage.startsWith('http') ? ogImage : `${site.siteUrl}${ogImage}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary meta -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/assets/logo.jpeg" />
+    <link rel="apple-touch-icon" href="/assets/logo.jpeg" />
+
+    <!-- LocalBusiness JSON-LD (on every page) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": site.name,
+      "description": site.description,
+      "url": site.siteUrl,
+      "logo": `${site.siteUrl}/assets/logo.jpeg`,
+      "image": `${site.siteUrl}/assets/pack-front.png`,
+      "telephone": site.phone1,
+      "email": site.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "PO/PS Virar",
+        "addressLocality": "Palghar",
+        "addressRegion": "Maharashtra",
+        "postalCode": site.pincode,
+        "addressCountry": "IN"
+      }
+    })} />
+
+    <!-- Page-specific JSON-LD -->
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body class={bodyClass}>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <FloatingWhatsApp />
+
+    <!-- Back to top button -->
+    <button
+      id="back-to-top"
+      aria-label="Back to top"
+      title="Back to top"
+      class="fixed bottom-24 right-4 z-40 w-10 h-10 rounded-full bg-green text-white flex items-center justify-center shadow-lg hover:bg-green-dark transition-colors"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+
+    <!-- Core scripts -->
+    <script src="../scripts/menu.js"></script>
+    <script src="../scripts/reveal.js"></script>
+    <script src="../scripts/backtop.js"></script>
+  </body>
+</html>

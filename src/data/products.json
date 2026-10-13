@@ -1,0 +1,282 @@
+[{
+    "id": "ctc-1kg",
+    "name": "Tea Reserve CTC Tea",
+    "slug": "ctc-tea-1kg",
+    "weight": "1 kg",
+    "weightGrams": 1000,
+    "price": 420,
+    "priceNote": "Incl. of all taxes",
+    "shelfLife": "12 months from packaging",
+    "description": "Pure CTC (Crush, Tear, Curl) tea sourced from Assam gardens. Delivers a rich, strong cup that holds up beautifully with milk and sugar — perfect for your everyday chai.",
+    "features": [
+      "Pure CTC tea from Assam gardens",
+      "Rich aroma, strong taste",
+      "Holds up well with milk and sugar",
+      "Hygienic packaging — packing date printed on every pack",
+      "MRP inclusive of all taxes"
+    ],
+    "image": "/assets/pack-front.png",
+    "imageAlt": "Tea Reserve 1 kg CTC Tea pack — front view",
+    "brewing": {
+      "tip": "For a perfect cup, boil 200 ml water, add 1–2 tsp of Tea Reserve CTC tea, let it simmer for 1–2 minutes, add milk and sugar to taste, strain and enjoy.",
+      "ratio": "1–2 tsp per cup (approx. 2g per 100ml)"
+    },
+    "nutrition": [
+      {
+        "nutrient": "Energy",
+        "unit": "kcal",
+        "per100g": "120",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Protein",
+        "unit": "g",
+        "per100g": "19",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Carbohydrate",
+        "unit": "g",
+        "per100g": "4",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fat",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fibre",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Cholesterol",
+        "unit": "g",
+        "per100g": "Nil",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Vitamin C",
+        "unit": "mg",
+        "per100g": "100",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Minerals",
+        "unit": "mg",
+        "per100g": "500",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Calcium",
+        "unit": "mg",
+        "per100g": "30",
+        "per100ml": "Traces"
+      }
+    ],
+    "nutritionFootnote": "Made from 2g tea in 100ml of distilled water. Does not include values of added milk and sugar.",
+    "whatsappMessage": "Hi! I'd like to order Tea Reserve CTC Tea (1 kg) — MRP ₹420. Please share availability and delivery details.",
+    "jsonld": {
+      "@type": "Product",
+      "name": "Tea Reserve CTC Tea 1 kg",
+      "brand": "Tea Reserve",
+      "offers": {
+        "@type": "Offer",
+        "price": "420",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  },
+  
+  {
+    "id": "ctc-500g",
+    "name": "Tea Reserve CTC Tea",
+    "slug": "ctc-tea-500g",
+    "weight": "500 g",
+    "weightGrams": 500,
+    "price": 220,
+    "priceNote": "Incl. of all taxes",
+    "shelfLife": "12 months from packaging",
+    "description": "Pure CTC (Crush, Tear, Curl) tea sourced from Assam gardens. Delivers a rich, strong cup that holds up beautifully with milk and sugar — perfect for your everyday chai.",
+    "features": [
+      "Pure CTC tea from Assam gardens",
+      "Rich aroma, strong taste",
+      "Holds up well with milk and sugar",
+      "Hygienic packaging — packing date printed on every pack",
+      "MRP inclusive of all taxes"
+    ],
+    "image": "/assets/pack-500g.jpg",
+    "imageAlt": "Tea Reserve 500 g CTC Tea pack — front view",
+    "brewing": {
+      "tip": "For a perfect cup, boil 200 ml water, add 1–2 tsp of Tea Reserve CTC tea, let it simmer for 1–2 minutes, add milk and sugar to taste, strain and enjoy.",
+      "ratio": "1–2 tsp per cup (approx. 2g per 100ml)"
+    },
+    "nutrition": [
+      {
+        "nutrient": "Energy",
+        "unit": "kcal",
+        "per100g": "120",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Protein",
+        "unit": "g",
+        "per100g": "19",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Carbohydrate",
+        "unit": "g",
+        "per100g": "4",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fat",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fibre",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Cholesterol",
+        "unit": "g",
+        "per100g": "Nil",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Vitamin C",
+        "unit": "mg",
+        "per100g": "100",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Minerals",
+        "unit": "mg",
+        "per100g": "500",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Calcium",
+        "unit": "mg",
+        "per100g": "30",
+        "per100ml": "Traces"
+      }
+    ],
+    "nutritionFootnote": "Made from 2g tea in 100ml of distilled water. Does not include values of added milk and sugar.",
+    "whatsappMessage": "Hi! I'd like to order Tea Reserve CTC Tea (500 g) — MRP ₹220. Please share availability and delivery details.",
+    "jsonld": {
+      "@type": "Product",
+      "name": "Tea Reserve CTC Tea 500 g",
+      "brand": "Tea Reserve",
+      "offers": {
+        "@type": "Offer",
+        "price": "220",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  },
+  {
+    "id": "ctc-250g",
+    "name": "Tea Reserve CTC Tea",
+    "slug": "ctc-tea-250g",
+    "weight": "250 g",
+    "weightGrams": 250,
+    "price": 110,
+    "priceNote": "Incl. of all taxes",
+    "shelfLife": "12 months from packaging",
+    "description": "Pure CTC (Crush, Tear, Curl) tea sourced from Assam gardens. Delivers a rich, strong cup that holds up beautifully with milk and sugar — perfect for your everyday chai.",
+    "features": [
+      "Pure CTC tea from Assam gardens",
+      "Rich aroma, strong taste",
+      "Holds up well with milk and sugar",
+      "Hygienic packaging — packing date printed on every pack",
+      "MRP inclusive of all taxes"
+    ],
+    "image": "/assets/pack-250g.jpg",
+    "imageAlt": "Tea Reserve 250 g CTC Tea pack — front view",
+    "brewing": {
+      "tip": "For a perfect cup, boil 200 ml water, add 1–2 tsp of Tea Reserve CTC tea, let it simmer for 1–2 minutes, add milk and sugar to taste, strain and enjoy.",
+      "ratio": "1–2 tsp per cup (approx. 2g per 100ml)"
+    },
+    "nutrition": [
+      {
+        "nutrient": "Energy",
+        "unit": "kcal",
+        "per100g": "120",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Protein",
+        "unit": "g",
+        "per100g": "19",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Carbohydrate",
+        "unit": "g",
+        "per100g": "4",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fat",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Fibre",
+        "unit": "g",
+        "per100g": "Traces",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Cholesterol",
+        "unit": "g",
+        "per100g": "Nil",
+        "per100ml": "Nil"
+      },
+      {
+        "nutrient": "Vitamin C",
+        "unit": "mg",
+        "per100g": "100",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Minerals",
+        "unit": "mg",
+        "per100g": "500",
+        "per100ml": "Traces"
+      },
+      {
+        "nutrient": "Calcium",
+        "unit": "mg",
+        "per100g": "30",
+        "per100ml": "Traces"
+      }
+    ],
+    "nutritionFootnote": "Made from 2g tea in 100ml of distilled water. Does not include values of added milk and sugar.",
+    "whatsappMessage": "Hi! I'd like to order Tea Reserve CTC Tea (250 g) — MRP ₹110. Please share availability and delivery details.",
+    "jsonld": {
+      "@type": "Product",
+      "name": "Tea Reserve CTC Tea 250 g",
+      "brand": "Tea Reserve",
+      "offers": {
+        "@type": "Offer",
+        "price": "110",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  }
+  
+]

@@ -1,0 +1,33 @@
+---
+// src/components/SectionTitle.astro
+// Usage: <SectionTitle title="..." subtitle="..." center />
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+  light?: boolean; // for dark backgrounds
+  tag?: string;    // small label above title
+}
+
+const { title, subtitle, center = false, light = false, tag } = Astro.props;
+const align = center ? 'text-center items-center' : 'items-start';
+const textColor = light ? 'text-cream' : 'text-green';
+const subColor = light ? 'text-cream/70' : 'text-ink/60';
+const tagColor = light ? 'text-gold-light' : 'text-gold';
+---
+
+<div class={`flex flex-col gap-3 ${align}`}>
+  {tag && (
+    <span class={`text-xs font-semibold tracking-[0.2em] uppercase ${tagColor} font-sans`}>
+      {tag}
+    </span>
+  )}
+  <h2 class={`font-serif font-bold ${textColor}`}>{title}</h2>
+  <div class={`gold-divider ${center ? '' : 'gold-divider-left'} opacity-70`}></div>
+  {subtitle && (
+    <p class={`text-base sm:text-lg max-w-2xl leading-relaxed ${subColor} ${center ? 'text-center' : ''}`}>
+      {subtitle}
+    </p>
+  )}
+</div>
